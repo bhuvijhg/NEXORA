@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA — Study Intelligence</title>
+<style>
+:root{
+  --bg:#0b0d12;--panel:#121620;--panel2:#171c27;--text:#f5f7fb;--muted:#8d96a8;
+  --accent:#9b8cff;--accent2:#66e3c4;--danger:#ff7f96;--line:#252c39;--shadow:0 20px 50px rgba(0,0,0,.25)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#0b0d12,#101522 55%,#0b0d12);color:var(--text);min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{display:grid;grid-template-columns:235px 1fr;min-height:100vh}
+aside{border-right:1px solid var(--line);padding:28px 18px;background:rgba(9,11,16,.72);backdrop-filter:blur(18px);position:sticky;top:0;height:100vh}
+.logo{font-size:25px;font-weight:800;letter-spacing:.08em;margin:0 10px 5px}
+.tag{font-size:11px;color:var(--muted);margin:0 10px 30px}
+nav button{width:100%;border:0;background:transparent;color:var(--muted);padding:12px 13px;text-align:left;border-radius:12px;margin:3px 0}
+nav button.active,nav button:hover{background:var(--panel2);color:var(--text)}
+main{padding:34px;max-width:1450px;width:100%;margin:auto}
+.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:28px}
+.eyebrow{color:var(--accent2);font-size:12px;text-transform:uppercase;letter-spacing:.14em;font-weight:700}
+h1{font-size:38px;margin:5px 0 7px;letter-spacing:-.04em}
+.sub{color:var(--muted);margin:0}
+.clock{padding:12px 16px;border:1px solid var(--line);background:var(--panel);border-radius:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{background:rgba(18,22,32,.9);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}
+.span3{grid-column:span 3}.span4{grid-column:span 4}.span5{grid-column:span 5}.span6{grid-column:span 6}.span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}
+.card h2{font-size:15px;margin:0 0 15px}.metric{font-size:32px;font-weight:800}.muted{color:var(--muted)}
+.state{display:flex;align-items:center;gap:12px}.dot{width:12px;height:12px;border-radius:50%;background:var(--accent2);box-shadow:0 0 20px var(--accent2)}
+.bar{height:8px;background:#242a35;border-radius:99px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:inherit}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}
+.task input{accent-color:var(--accent);width:17px;height:17px}.task.done span{text-decoration:line-through;color:#667080}
+.badge{font-size:11px;padding:5px 8px;border-radius:8px;background:#202634;color:#bfc7d5}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#1a202c;color:var(--text);padding:10px 13px;border-radius:11px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#0b0d12;font-weight:700}.btn.danger{color:var(--danger)}
+input[type=text],input[type=number],select{background:#0e121a;border:1px solid var(--line);color:var(--text);padding:11px 12px;border-radius:10px;outline:none}
+input:focus,select:focus{border-color:var(--accent)}
+.add{display:flex;gap:8px;margin-top:12px}.add input{flex:1}
+.mini{font-size:12px;color:var(--muted);line-height:1.55}
+.insight{padding:13px;border-left:3px solid var(--accent);background:#171c28;border-radius:8px;margin:8px 0;font-size:13px;line-height:1.5}
+.timer{font-size:55px;font-variant-numeric:tabular-nums;font-weight:800;text-align:center;letter-spacing:-.04em}
+.center{text-align:center}.ring{width:155px;height:155px;border-radius:50%;margin:5px auto 15px;display:grid;place-items:center;background:conic-gradient(var(--accent) var(--p,0%),#252b37 0)}.ring:after{content:"";width:125px;height:125px;border-radius:50%;background:var(--panel);position:absolute}.ring strong{position:relative;z-index:1}
+.empty{color:var(--muted);padding:15px 0}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:20px;z-index:10}.modalbox{max-width:560px;width:100%;background:#111620;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 30px 90px #000}
+.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.profile{padding:18px;border:1px solid var(--line);background:#171c27;color:var(--text);border-radius:15px;text-align:left}.profile:hover{border-color:var(--accent)}
+.kpi{font-size:12px;color:var(--muted)}.history{max-height:220px;overflow:auto}
+@media(max-width:900px){.app{grid-template-columns:1fr}aside{height:auto;position:relative;border-right:0;border-bottom:1px solid var(--line)}nav{display:flex;overflow:auto}nav button{min-width:max-content}.span3,.span4,.span5,.span6,.span7,.span8{grid-column:span 12}main{padding:20px}h1{font-size:30px}}
+@media(max-width:600px){.profile-grid{grid-template-columns:1fr}.top{display:block}.clock{margin-top:15px}}
+</style>
+</head>
+<body>
+<div id="onboarding" class="modal hidden">
+  <div class="modalbox">
+    <div class="eyebrow">NEXORA</div>
+    <h1>Build your study rhythm.</h1>
+    <p class="sub">Choose a workspace. NEXORA will personalize the experience and learn only from activity inside the app.</p>
+    <div class="profile-grid">
+      <button class="profile" onclick="chooseProfile('student')"><b>🎓 Student</b><br><span class="mini">Study, assignments, focus and revision.</span></button>
+      <button class="profile" onclick="chooseProfile('work')"><b>💼 Work</b><br><span class="mini">Projects, deadlines and focused work.</span></button>
+      <button class="profile" onclick="chooseProfile('personal')"><b>🌱 Personal</b><br><span class="mini">Goals, tasks and personal productivity.</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+<aside>
+  <div class="logo">NEXORA</div><p class="tag">PRODUCTIVITY, ADAPTED.</p>
+  <nav>
+    <button class="active" onclick="showPage('dashboard',this)">◈ Dashboard</button>
+    <button onclick="showPage('tasks',this)">✓ Tasks</button>
+    <button onclick="showPage('focus',this)">◷ Focus</button>
+    <button onclick="showPage('mirror',this)">◉ Study Mirror</button>
+    <button onclick="showPage('settings',this)">⚙ Settings</button>
+  </nav>
+</aside>
+
+<main>
+<section id="dashboard">
+  <div class="top">
+    <div><div class="eyebrow" id="date"></div><h1 id="greeting">Good evening.</h1><p class="sub">NEXORA is observing your workflow — not judging it.</p></div>
+    <div class="clock" id="clock"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card span4">
+      <h2>Current state</h2>
+      <div class="state"><i class="dot" id="stateDot"></i><div><b id="state">Getting started</b><div class="mini" id="stateReason">Not enough activity yet.</div></div></div>
+    </div>
+    <div class="card span4">
+      <h2>Today's focus</h2><div class="metric" id="focusMetric">0m</div><div class="mini">Active focus time today</div>
+    </div>
+    <div class="card span4">
+      <h2>Completion</h2><div class="metric" id="completionMetric">0%</div><div class="bar"><i id="completionBar"></i></div>
+    </div>
+
+    <div class="card span7">
+      <div class="row"><h2>Today</h2><span class="badge" id="profileBadge">Student</span></div>
+      <div id="taskList"></div>
+      <div class="add"><input id="taskInput" type="text" placeholder="Add a task..."><button class="btn primary" onclick="addTask()">Add</button></div>
+    </div>
+
+    <div class="card span5">
+      <h2>NEXORA observation</h2>
+      <div id="quickInsight"></div>
+      <div class="insight" id="overplan"></div>
+    </div>
+
+    <div class="card span12">
+      <div class="row"><h2>Daily reset</h2><span class="badge" id="lastReset"></span></div>
+      <p class="mini">Each new calendar day gets a fresh daily state. Historical focus, tasks and observations remain available.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tasks" class="hidden">
+  <div class="top"><div><div class="eyebrow">Workflow</div><h1>Tasks</h1><p class="sub">NEXORA tracks what gets done — and what repeatedly gets deferred.</p></div></div>
+  <div class="grid"><div class="card span8"><div id="allTasks"></div></div><div class="card span4"><h2>Task pattern</h2><div id="taskPattern"></div></div></div>
+</section>
+
+<section id="focus" class="hidden">
+  <div class="top"><div><div class="eyebrow">Focus engine</div><h1>Focus</h1><p class="sub">Your sessions become part of NEXORA's understanding of your study rhythm.</p></div></div>
+  <div class="grid">
+    <div class="card span6">
+      <h2>Manual study intake</h2>
+      <p class="mini">No automatic Pomodoro. Tell NEXORA what you plan to study and how much time you intend to spend.</p>
+      <div style="display:grid;gap:10px;margin-top:16px">
+        <input id="focusTopic" type="text" placeholder="What are you studying? e.g. Vectors">
+        <input id="focusSubject" type="text" placeholder="Subject e.g. Mathematics">
+        <input id="focusMinutes" type="number" min="1" placeholder="Planned minutes e.g. 60">
+        <button class="btn primary" onclick="logStudyPlan()">Add study plan</button>
+      </div>
+      <div id="focusPlans" style="margin-top:16px"></div>
+    </div>
+    <div class="card span6">
+      <h2>Today's study time</h2>
+      <div class="metric" id="manualFocusMetric">0m</div>
+      <p class="mini">Enter completed study time after each session. This becomes part of NEXORA's pattern analysis.</p>
+      <div class="actions" style="margin-top:14px">
+        <button class="btn primary" onclick="logCompletedMinutes(15)">+15 min completed</button>
+        <button class="btn" onclick="logCompletedMinutes(30)">+30 min completed</button>
+        <button class="btn" onclick="logCompletedMinutes(60)">+60 min completed</button>
+        <input id="customCompletedMinutes" type="number" min="1" placeholder="Custom minutes" style="max-width:150px">
+        <button class="btn" onclick="logCustomCompleted()">Log</button>
+      </div>
+    </div>
+    <div class="card span12">
+      <h2>Today's study plans</h2>
+      <div id="sessions"></div>
+    </div>
+  </div>
+</section>
+
+<section id="mirror" class="hidden">
+  <div class="top"><div><div class="eyebrow">Automatic analysis</div><h1>Study Mirror</h1><p class="sub">A reflection generated from your activity inside NEXORA.</p></div></div>
+  <div class="grid"><div class="card span7"><h2>Your patterns</h2><div id="mirrorInsights"></div></div><div class="card span5"><h2>Study rhythm</h2><div id="rhythm"></div></div></div>
+</section>
+
+<section id="settings" class="hidden">
+  <div class="top"><div><div class="eyebrow">Control</div><h1>Settings</h1><p class="sub">Change the experience without losing your history.</p></div></div>
+  <div class="grid"><div class="card span6"><h2>Workspace</h2><p class="mini">Current profile</p><select id="profileSelect" onchange="changeProfile(this.value)"><option value="student">Student</option><option value="work">Work</option><option value="personal">Personal</option></select></div><div class="card span6"><h2>Data</h2><div class="actions"><button class="btn danger" onclick="clearAll()">Clear NEXORA data</button></div><p class="mini">This removes locally stored tasks, sessions and observations.</p></div></div>
+</section>
+</main>
+</div>
+
+<script>
+const KEY='nexora_v2';
+const today=()=>new Date().toISOString().slice(0,10);
+const base={
+ profile:null,lastDate:today(),tasks:[],sessions:[],studyPlans:[],history:[],daily:{date:today(),focus:0,starts:0,stops:0,completed:0,taskAdds:0}
+};
+let data=load();
+data.studyPlans=data.studyPlans||[];
+let interrupted=false;
+
+function load(){
+ try{const x=JSON.parse(localStorage.getItem(KEY)); return x?{...base,...x,daily:{...base.daily,...x.daily}}:structuredClone(base)}catch(e){return structuredClone(base)}
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function ensureDay(){
+ const d=today();
+ if(data.lastDate!==d){
+   data.history.push({date:data.daily.date,...data.daily});
+   data.lastDate=d;
+   data.daily={date:d,focus:0,starts:0,stops:0,completed:0,taskAdds:0};
+   data.tasks=data.tasks.map(t=>({...t,done:false,day:d}));
+   data.studyPlans=(data.studyPlans||[]).map(p=>({...p,completed:0}));
+   save();
+ }
+}
+function chooseProfile(p){data.profile=p;save();document.getElementById('onboarding').classList.add('hidden');render()}
+function changeProfile(p){data.profile=p;save();render()}
+function boot(){
+ ensureDay();
+ if(!data.profile)document.getElementById('onboarding').classList.remove('hidden');
+ render();setInterval(updateClock,1000);
+}
+function updateClock(){
+ const n=new Date();document.getElementById('clock').textContent=n.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+function showPage(id,btn){
+ document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+ render();
+}
+function addTask(){
+ const input=document.getElementById('taskInput'),v=input.value.trim();if(!v)return;
+ data.tasks.push({id:Date.now(),text:v,done:false,created:today(),day:today()});
+ data.daily.taskAdds++;save();input.value='';render();
+}
+function toggleTask(id){
+ const t=data.tasks.find(x=>x.id===id);if(!t)return;
+ t.done=!t.done;if(t.done)data.daily.completed++;else data.daily.completed=Math.max(0,data.daily.completed-1);
+ save();render();
+}
+function removeTask(id){data.tasks=data.tasks.filter(t=>t.id!==id);save();render()}
+function render(){
+ ensureDay();
+ const n=new Date(),hour=n.getHours();
+ document.getElementById('date').textContent=n.toLocaleDateString([], {weekday:'long',month:'long',day:'numeric'});
+ document.getElementById('greeting').textContent=hour<12?'Good morning.':hour<18?'Good afternoon.':'Good evening.';
+ document.getElementById('profileBadge').textContent=(data.profile||'student')[0].toUpperCase()+(data.profile||'student').slice(1);
+ document.getElementById('profileSelect').value=data.profile||'student';
+ const dailyTasks=data.tasks.filter(t=>t.day===today() || t.created===today());
+ const done=dailyTasks.filter(t=>t.done).length;
+ const pct=dailyTasks.length?Math.round(done/dailyTasks.length*100):0;
+ document.getElementById('completionMetric').textContent=pct+'%';document.getElementById('completionBar').style.width=pct+'%';
+ document.getElementById('focusMetric').textContent=formatMin(data.daily.focus);
+ document.getElementById('lastReset').textContent='Last daily state: '+data.daily.date;
+ document.getElementById('taskList').innerHTML=taskHTML(dailyTasks);
+ document.getElementById('allTasks').innerHTML=taskHTML(data.tasks);
+ updateState();updateInsights();updateSessions();updateMirror();updatePattern();
+}
+function taskHTML(tasks){
+ if(!tasks.length)return '<div class="empty">No tasks yet. Add one above.</div>';
+ return tasks.slice().reverse().map(t=>`<div class="task ${t.done?'done':''}">
+ <input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${t.id})"><span style="flex:1">${esc(t.text)}</span>
+ <button class="btn danger" style="padding:6px 8px" onclick="removeTask(${t.id})">×</button></div>`).join('');
+}
+function updateState(){
+ const d=data.daily,total=data.tasks.filter(t=>t.day===today()||t.created===today()).length,done=data.tasks.filter(t=>(t.day===today()||t.created===today())&&t.done).length;
+ let state='Getting started',reason='Complete a few tasks or a focus session and NEXORA will begin detecting patterns.';
+ if(d.focus>=45 && d.starts>=2 && d.stops<=1){state='Building momentum';reason='Multiple study entries with meaningful completed focus time.'}
+ else if(d.stops>=3 || (d.starts>=2 && d.focus<10)){state='Drifting';reason='Several study plans were started with little completed focus time.'}
+ else if(total>=6 && done/Math.max(total,1)<.4){state='Overloaded';reason='A large portion of today’s workload remains unfinished.'}
+ else if(d.focus>=20){state='Focusing';reason='You have accumulated meaningful focus time today.'}
+ else if(d.completed>0){state='Building momentum';reason='Completed work is creating activity for NEXORA to learn from.'}
+ document.getElementById('state').textContent=state;document.getElementById('stateReason').textContent=reason;
+}
+function updateInsights(){
+ const tasks=data.tasks.filter(t=>t.day===today()||t.created===today()),done=tasks.filter(t=>t.done).length;
+ document.getElementById('quickInsight').innerHTML=tasks.length?`<div class="insight"><b>${done}/${tasks.length}</b> tasks completed today. NEXORA is using this activity to understand your workflow.</div>`:'<div class="insight">Add tasks and use Focus to let NEXORA begin learning your rhythm.</div>';
+ const over=tasks.length>=6&&done/tasks.length<.4?'Your current plan may be heavier than your recent completion pattern supports.':tasks.length>=4&&done/tasks.length>.7?'Your completion rate is strong today.': 'NEXORA needs more activity before it can identify an over-planning pattern.';
+ document.getElementById('overplan').textContent=over;
+}
+function updateSessions(){
+ const s=data.sessions.filter(x=>x.date===today());
+ const plans=(data.studyPlans||[]).filter(x=>x.date===today());
+ document.getElementById('sessions').innerHTML =
+   (plans.length ? plans.slice().reverse().map(p=>`<div class="task">
+      <span><b>${esc(p.topic)}</b><br><span class="mini">${esc(p.subject)} · planned ${p.planned} min</span></span>
+      <span class="badge">${p.completed||0}/${p.planned} min</span>
+   </div>`).join('') : '') +
+   (s.length ? s.slice().reverse().map(x=>`<div class="task"><span>Completed study</span><span class="badge">${x.minutes} min</span></div>`).join('') : '') ||
+   '<div class="empty">No study activity recorded today.</div>';
+ document.getElementById('manualFocusMetric').textContent=formatMin(data.daily.focus);
+ const box=document.getElementById('focusPlans');
+ if(box) box.innerHTML=plans.length
+   ? plans.map(p=>`<div class="insight"><b>${esc(p.topic)}</b> — ${esc(p.subject)}<br><span class="mini">${p.planned} min planned</span></div>`).join('')
+   : '<div class="empty">Your added study plans will appear here.</div>';
+}
+function updatePattern(){
+ const all=data.history.concat([{date:today(),...data.daily}]);
+ const recent=all.slice(-7),avg=recent.length?Math.round(recent.reduce((a,x)=>a+x.focus,0)/recent.length):0;
+ document.getElementById('taskPattern').innerHTML=`<p class="mini">7-day average focus</p><div class="metric">${avg}m</div><p class="mini">${data.daily.starts} sessions started today · ${data.daily.stops} stops recorded.</p>`;
+}
+function updateMirror(){
+ const a=[];
+ const sessions=data.sessions.concat(data.history.map(x=>({date:x.date,minutes:x.focus})));
+ const hours={};sessions.forEach(s=>{if(!s.date)return;hours[s.date]=(hours[s.date]||0)+(+s.minutes||0)});
+ if(data.daily.focus>=30)a.push('You have already accumulated a meaningful amount of focus time today.');
+ if(data.daily.stops>=3)a.push('Several interruptions occurred today; NEXORA has marked this as a possible focus-drift signal.');
+ if(data.tasks.length>=6 && data.daily.completed<Math.ceil(data.tasks.filter(t=>t.day===today()||t.created===today()).length*.4))a.push('Your current task load is relatively high compared with today’s completion activity.');
+ if(!a.length)a.push('Keep using NEXORA normally. Pattern insights become more useful as activity accumulates.');
+ document.getElementById('mirrorInsights').innerHTML=a.map(x=>`<div class="insight">${x}</div>`).join('');
+ const completed=data.tasks.filter(t=>t.done).length;
+ const total=data.tasks.length;
+ document.getElementById('rhythm').innerHTML=`<div class="kpi">TOTAL TASKS COMPLETED</div><div class="metric">${completed}</div><br><div class="kpi">TOTAL FOCUS SESSIONS</div><div class="metric">${data.sessions.length}</div><br><div class="kpi">OBSERVATION WINDOW</div><div class="metric">${Math.max(1,data.history.length+1)}d</div>`;
+}
+function logStudyPlan(){
+ const topic=document.getElementById('focusTopic').value.trim();
+ const subject=document.getElementById('focusSubject').value.trim() || 'General';
+ const minutes=Math.max(1,parseInt(document.getElementById('focusMinutes').value,10)||0);
+ if(!topic || !minutes)return;
+ data.studyPlans=data.studyPlans||[];
+ data.studyPlans.push({id:Date.now(),topic,subject,planned:minutes,completed:0,date:today()});
+ data.daily.starts++;
+ save();
+ document.getElementById('focusTopic').value='';
+ document.getElementById('focusSubject').value='';
+ document.getElementById('focusMinutes').value='';
+ render();
+}
+
+function logCompletedMinutes(minutes){
+ data.daily.focus += minutes;
+ data.daily.starts++;
+ data.sessions.push({
+   date:today(),
+   minutes,
+   completedAt:new Date().toISOString(),
+   type:'manual'
+ });
+ save();
+ render();
+}
+
+function logCustomCompleted(){
+ const value=parseInt(document.getElementById('customCompletedMinutes').value,10);
+ if(value>0) logCompletedMinutes(value);
+}
+
+function formatMin(m){return m<60?m+'m':Math.floor(m/60)+'h '+m%60+'m'}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function clearAll(){if(confirm('Clear all locally stored NEXORA data?')){localStorage.removeItem(KEY);location.reload()}}
+document.getElementById('taskInput').addEventListener('keydown',e=>{if(e.key==='Enter')addTask()});
+boot();
+</script>
+</body>
+</html>
