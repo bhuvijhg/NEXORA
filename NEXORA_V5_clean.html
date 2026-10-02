@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXORA</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   NEXORA — GLOBAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 70% 0%,
+            rgba(128, 45, 180, 0.12),
+            transparent 35%
+        ),
+        #08060d;
+    color: #f5eff8;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.app {
+    min-height: 100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 230px;
+    height: 100vh;
+
+    padding: 28px 14px 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #130c1d,
+            #09060e
+        );
+
+    border-right: 1px solid rgba(180,100,255,0.16);
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 10px;
+    margin-bottom: 48px;
+}
+
+.logo-mark {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #a855f7,
+        #652394
+    );
+
+    box-shadow:
+        0 0 25px rgba(168,85,247,0.3);
+
+    font-family: "Space Grotesk";
+    font-weight: 700;
+}
+
+.logo-area h2 {
+    font-family: "Space Grotesk";
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.logo-area span {
+    display: block;
+    margin-top: 2px;
+
+    color: #716979;
+    font-size: 9px;
+}
+
+.sidebar-label {
+    padding: 0 12px;
+    margin-bottom: 10px;
+
+    color: #5f5867;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.nav-link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 11px 12px;
+    margin-bottom: 4px;
+
+    border-radius: 9px;
+
+    color: #918998;
+    font-size: 12px;
+
+    transition: 0.2s ease;
+}
+
+.nav-link:hover {
+    background: rgba(168,85,247,0.08);
+    color: #ddd0e8;
+}
+
+.nav-link.active {
+    color: #c084fc;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(168,85,247,0.23),
+            rgba(168,85,247,0.06)
+        );
+
+    box-shadow:
+        inset 0 0 0 1px rgba(168,85,247,0.12);
+}
+
+.nav-link.active::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+
+    width: 2px;
+    height: 55%;
+
+    background: #c084fc;
+    border-radius: 4px;
+}
+
+.nav-icon {
+    width: 17px;
+    text-align: center;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.sidebar-tip {
+    display: flex;
+    gap: 10px;
+
+    padding: 13px;
+
+    border-radius: 11px;
+
+    background: rgba(168,85,247,0.055);
+    border: 1px solid rgba(168,85,247,0.1);
+}
+
+.tip-icon {
+    color: #c084fc;
+}
+
+.sidebar-tip strong {
+    font-size: 10px;
+}
+
+.sidebar-tip p {
+    margin-top: 3px;
+
+    color: #716979;
+    font-size: 9px;
+}
+
+.version {
+    margin-top: 15px;
+    padding-left: 12px;
+
+    color: #4c4653;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    margin-left: 230px;
+
+    min-height: 100vh;
+
+    padding: 40px 44px 60px;
+
+    max-width: 1500px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 32px;
+}
+
+.eyebrow {
+    color: #c084fc;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 1.8px;
+
+    margin-bottom: 8px;
+}
+
+.top-header h1 {
+    font-family: "Space Grotesk";
+
+    font-size: clamp(28px, 3vw, 40px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1.5px;
+}
+
+.top-header h1 span {
+    color: #c084fc;
+}
+
+.header-subtitle {
+    margin-top: 9px;
+
+    color: #716979;
+    font-size: 12px;
+}
+
+.status-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border: 1px solid rgba(57,201,138,0.14);
+    border-radius: 20px;
+
+    color: #85808b;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #39c98a;
+
+    box-shadow:
+        0 0 9px rgba(57,201,138,0.7);
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+.stat {
+    padding: 17px 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25,16,35,0.92),
+            rgba(12,8,18,0.92)
+        );
+
+    border: 1px solid rgba(180,100,255,0.16);
+
+    border-radius: 13px;
+
+    transition: 0.2s ease;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(168,85,247,0.3);
+}
+
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+
+    color: #aaa2b5;
+    font-size: 10px;
+}
+
+.stat-icon {
+    color: #c084fc;
+}
+
+.stat h3 {
+    margin-top: 9px;
+
+    font-family: "Space Grotesk";
+
+    font-size: 24px;
+}
+
+.stat p {
+    margin-top: 5px;
+
+    color: #625c68;
+    font-size: 8px;
+}
+
+.green {
+    color: #39c98a;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(250px, 0.75fr);
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+.panel {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,11,25,0.96),
+            rgba(9,7,14,0.96)
+        );
+
+    border: 1px solid rgba(180,100,255,0.16);
+
+    border-radius: 16px;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+.timer-panel {
+    min-height: 500px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 22px 24px 0;
+}
+
+.label {
+    color: #756d7e;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: 1.4px;
+
+    margin-bottom: 6px;
+}
+
+.panel-header h2,
+.section-heading h2 {
+    font-family: "Space Grotesk";
+    font-size: 17px;
+}
+
+.ready {
+    color: #625b68;
+    font-size: 8px;
+}
+
+.timer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 26px 25px 24px;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 5px;
+
+    padding: 4px;
+
+    background: rgba(255,255,255,0.025);
+
+    border-radius: 20px;
+}
+
+.mode {
+    border: none;
+
+    padding: 7px 13px;
+
+    border-radius: 16px;
+
+    background: transparent;
+
+    color: #817887;
+
+    font-size: 9px;
+}
+
+.mode.active {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #aa4fff,
+            #8d32d0
+        );
+
+    box-shadow:
+        0 5px 18px rgba(168,85,247,0.25);
+}
+
+.timer {
+    margin-top: 22px;
+
+    font-family: "Space Grotesk";
+
+    font-size: clamp(70px, 9vw, 108px);
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing: -6px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #a7a0ad
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.timer-description {
+    margin-top: 7px;
+
+    color: #69616f;
+    font-size: 10px;
+}
+
+.timer-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 20px;
+}
+
+.start {
+    min-width: 145px;
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a94bf8,
+            #7926b2
+        );
+
+    color: white;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.reset {
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid rgba(180,100,255,0.16);
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,0.025);
+
+    color: #89808f;
+
+    font-size: 15px;
+}
+
+.session-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    margin-top: 20px;
+
+    color: #635b69;
+}
+
+.session-info div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.session-info span {
+    font-size: 8px;
+}
+
+.session-info strong {
+    color: #b9afc0;
+    font-size: 10px;
+}
+
+.divider {
+    width: 1px;
+    height: 15px;
+
+    background: rgba(255,255,255,0.08);
+}
+
+
+/* =========================
+   TASKS
+========================= */
+
+.tasks {
+    padding: 23px;
+    margin-bottom: 18px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.progress {
+    color: #77707e;
+    font-size: 9px;
+}
+
+.task-input {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.task-input input {
+    flex: 1;
+
+    padding: 12px 14px;
+
+    border: 1px solid rgba(168,85,247,0.12);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: rgba(255,255,255,0.025);
+
+    color: white;
+
+    font-size: 10px;
+}
+
+.task-input button {
+    border: none;
+
+    padding: 0 17px;
+
+    border-radius: 9px;
+
+    background: #8c36c5;
+
+    color: white;
+
+    font-size: 9px;
+}
+
+.task-list {
+    list-style: none;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 12px;
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,0.018);
+
+    border: 1px solid rgba(255,255,255,0.035);
+}
+
+.check {
+    width: 16px;
+    height: 16px;
+
+    border-radius: 5px;
+
+    border: 1px solid #544b5d;
+
+    background: transparent;
+
+    color: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-item.completed .check {
+    background: #a855f7;
+    border-color: #a855f7;
+    color: white;
+}
+
+.task-text {
+    flex: 1;
+
+    color: #b5acbc;
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #5f5865;
+}
+
+.delete {
+    border: none;
+    background: transparent;
+
+    color: #554d59;
+    font-size: 13px;
+}
+
+
+/* =========================
+   EXTRA SECTIONS
+========================= */
+
+.extra {
+    padding: 23px;
+    margin-bottom: 18px;
+}
+
+.solver {
+    display: flex;
+    gap: 8px;
+}
+
+.solver input {
+    flex: 1;
+
+    padding: 12px;
+
+    border: 1px solid rgba(168,85,247,0.12);
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,0.025);
+
+    color: white;
+
+    outline: none;
+}
+
+.solver button {
+    border: none;
+
+    padding: 0 20px;
+
+    border-radius: 9px;
+
+    background: #8c36c5;
+
+    color: white;
+}
+
+.result {
+    margin-top: 12px;
+
+    padding: 12px;
+
+    min-height: 42px;
+
+    border-radius: 9px;
+
+    background: rgba(168,85,247,0.045);
+
+    color: #c084fc;
+
+    font-family: "Space Grotesk";
+}
+
+
+/* =========================
+   FLASHCARD
+========================= */
+
+.flashcard {
+    height: 180px;
+
+    perspective: 1000px;
+
+    cursor: pointer;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    transition: transform 0.6s;
+
+    transform-style: preserve-3d;
+}
+
+.flashcard.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    inset: 0;
+
+    backface-visibility: hidden;
+
+    border-radius: 13px;
+
+    border: 1px solid rgba(168,85,247,0.14);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: #0e0915;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: #10091a;
+}
+
+.card-front span,
+.card-back span {
+    color: #74687c;
+    font-size: 7px;
+    letter-spacing: 1.5px;
+}
+
+.card-front h3,
+.card-back h3 {
+    margin-top: 12px;
+
+    font-family: "Space Grotesk";
+
+    font-size: 21px;
+}
+
+.card-front p,
+.card-back p {
+    margin-top: 10px;
+
+    color: #5e5766;
+
+    font-size: 8px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+
+    color: #47414c;
+
+    font-size: 8px;
+
+    padding: 20px 3px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-menu {
+    display: none;
+
+    position: fixed;
+
+    top: 15px;
+    left: 15px;
+
+    width: 40px;
+    height: 40px;
+
+    z-index: 2000;
+
+    border: 1px solid rgba(180,100,255,0.2);
+
+    border-radius: 9px;
+
+    background: #120b19;
+
+    color: white;
+
+    font-size: 17px;
+}
+
+@media(max-width: 900px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: 0.25s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 75px 20px 40px;
+    }
+
+    .top-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 550px) {
+
+    .main {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .top-header h1 {
+        font-size: 30px;
+    }
+
+    .mode {
+        padding: 7px 8px;
+        font-size: 8px;
+    }
+
+    .timer {
+        font-size: 70px;
+        letter-spacing: -4px;
+    }
+
+    .task-input,
+    .solver {
+        flex-direction: column;
+    }
+
+    .task-input button,
+    .solver button {
+        height: 38px;
+    }
+
+}
+
+
+/* =========================
+   MANUAL STUDY TIMER
+========================= */
+.manual-timer {
+    margin-top: 20px;
+    text-align: center;
+}
+.manual-timer-display {
+    margin-top: 10px;
+    font-family: "Space Grotesk";
+    font-size: clamp(64px, 8vw, 92px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -4px;
+    background: linear-gradient(180deg,#ffffff,#a7a0ad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.manual-timer-status {
+    min-height: 18px;
+    margin-top: 7px;
+    color: #807787;
+    font-size: 11px;
+}
+.manual-timer-controls {
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:14px;
+}
+.timer-action {
+    border:1px solid rgba(168,85,247,.18);
+    border-radius:9px;
+    padding:10px 14px;
+    background:rgba(168,85,247,.07);
+    color:#c084fc;
+    font-size:11px;
+}
+.timer-action.primary {
+    border:none;
+    background:linear-gradient(135deg,#a94bf8,#7926b2);
+    color:white;
+}
+@media(max-width:700px){
+    .study-intake-grid{grid-template-columns:1fr 1fr;}
+    .study-intake-grid .add-plan{min-height:42px;}
+}
+
+/* =========================
+   NEXORA INTELLIGENCE
+========================= */
+.study-intake {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+}
+.study-intake-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 105px 110px;
+    gap: 8px;
+    margin-top: 22px;
+}
+.study-intake input {
+    padding: 13px 14px;
+    border: 1px solid rgba(168,85,247,0.12);
+    border-radius: 9px;
+    background: rgba(255,255,255,0.025);
+    color: white;
+    outline: none;
+    font-size: 12px;
+}
+.study-intake input:focus {
+    border-color: rgba(168,85,247,0.45);
+}
+.study-intake .add-plan {
+    border: none;
+    border-radius: 9px;
+    background: #8c36c5;
+    color: white;
+    font-size: 10px;
+}
+.plan-list {
+    margin-top: 16px;
+    display: grid;
+    gap: 7px;
+}
+.plan-row {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 12px;
+    border:1px solid rgba(168,85,247,0.10);
+    border-radius:9px;
+    background:rgba(255,255,255,0.018);
+}
+.plan-row .plan-name { color:#cfc5d5; font-size:12px; }
+.plan-row .plan-meta { color:#827889; font-size:10px; margin-top:3px; }
+.plan-row button {
+    min-width:76px;
+    border:1px solid rgba(168,85,247,.18);
+    background:rgba(168,85,247,.06);
+    color:#c084fc;
+    border-radius:7px;
+    padding:6px 8px;
+    font-size:8px;
+}
+.intelligence-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+.insight-box {
+    padding:18px;
+    border:1px solid rgba(168,85,247,.10);
+    border-radius:12px;
+    background:rgba(255,255,255,.018);
+}
+.insight-box h3 { margin-top:7px; font-family:"Space Grotesk"; font-size:15px; }
+.insight-box p { margin-top:8px; color:#716979; font-size:9px; line-height:1.6; }
+.state-dot {
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:#a855f7; margin-right:6px; box-shadow:0 0 10px rgba(168,85,247,.6);
+}
+@media(max-width:700px){
+ .study-intake-grid{grid-template-columns:1fr}
+ .study-intake .add-plan{height:38px}
+ .intelligence-grid{grid-template-columns:1fr}
+}
+
+
+/* =========================
+   ACCOUNT + PRODUCT POLISH
+========================= */
+.account-area{position:relative;display:flex;align-items:center;gap:8px}
+.profile-btn{display:flex;align-items:center;gap:9px;padding:7px 10px;border:1px solid rgba(168,85,247,.16);border-radius:11px;background:rgba(255,255,255,.025);color:#ddd3e4}
+.profile-avatar{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#a855f7,#652394);font-family:"Space Grotesk";font-weight:700}
+.profile-meta{text-align:left}.profile-name{font-size:10px;font-weight:600}.profile-type{font-size:8px;color:#746b7b;margin-top:2px}
+.profile-menu{display:none;position:absolute;right:0;top:48px;width:190px;padding:8px;background:#120b19;border:1px solid rgba(180,100,255,.18);border-radius:12px;box-shadow:0 18px 45px rgba(0,0,0,.45);z-index:3000}
+.profile-menu.open{display:block}.profile-menu button{width:100%;text-align:left;padding:10px;border:0;border-radius:8px;background:transparent;color:#bdb3c4;font-size:10px}.profile-menu button:hover{background:rgba(168,85,247,.08);color:#fff}.profile-menu .logout{color:#d58cff}
+.tracking-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.tracking-stat{padding:14px;border:1px solid rgba(168,85,247,.1);border-radius:11px;background:rgba(255,255,255,.018)}.tracking-stat span{display:block;color:#746b7b;font-size:8px;letter-spacing:1px}.tracking-stat strong{display:block;margin-top:7px;font-family:"Space Grotesk";font-size:18px}.tracking-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}.toggle{display:flex;align-items:center;gap:8px;color:#8f8797;font-size:9px}.toggle input{accent-color:#a855f7}.danger-btn{border:1px solid rgba(220,100,255,.16);background:rgba(168,85,247,.05);color:#c084fc;border-radius:8px;padding:8px 11px;font-size:9px}
+.auth-overlay{position:fixed;inset:0;z-index:5000;background:rgba(5,3,8,.92);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px}.auth-card{width:min(430px,100%);padding:32px;border-radius:20px;border:1px solid rgba(180,100,255,.2);background:linear-gradient(145deg,#160d20,#0b0710);box-shadow:0 25px 80px rgba(0,0,0,.55)}.auth-mark{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#a855f7,#652394);font-family:"Space Grotesk";font-weight:700;font-size:20px;box-shadow:0 0 28px rgba(168,85,247,.28)}.auth-card h2{font-family:"Space Grotesk";font-size:28px;margin-top:18px}.auth-card>p{color:#776d80;font-size:11px;line-height:1.6;margin-top:7px}.auth-form{display:grid;gap:9px;margin-top:22px}.auth-form input,.auth-form select{padding:12px 13px;border:1px solid rgba(168,85,247,.15);border-radius:9px;background:rgba(255,255,255,.03);color:white;outline:none}.auth-form select option{background:#120b19}.auth-form button{padding:12px;border:0;border-radius:9px;background:linear-gradient(135deg,#a94bf8,#7926b2);color:#fff;font-weight:600}.auth-switch{text-align:center;margin-top:13px;color:#746b7b;font-size:9px}.auth-switch button{border:0;background:none;color:#c084fc;font-size:9px}.auth-note{margin-top:12px;padding:9px;border-radius:8px;background:rgba(168,85,247,.05);color:#655c6c;font-size:8px;line-height:1.5}
+@media(max-width:800px){.tracking-grid{grid-template-columns:repeat(2,1fr)}.profile-meta{display:none}}
+
+
+/* =========================
+   NEXORA V3 — DASHBOARD POLISH
+========================= */
+.header-kicker-row{display:flex;align-items:center;gap:10px}.today-badge{padding:5px 8px;border:1px solid rgba(192,132,252,.2);border-radius:999px;color:#a994b5;background:rgba(168,85,247,.06);font-size:8px;letter-spacing:1px;font-weight:600}.header-date{margin-top:10px;color:#5f5866;font-size:10px}.account-area{gap:10px}.status-pill{font-size:9px;padding:8px 12px}.profile-btn{padding:8px 11px;transition:.2s ease}.profile-btn:hover{border-color:rgba(192,132,252,.35);background:rgba(168,85,247,.07);transform:translateY(-1px)}.profile-avatar{width:32px;height:32px}.profile-name{font-size:11px}.profile-type{font-size:9px}.profile-menu{top:52px}.stat{padding:19px 20px}.stat-top{font-size:11px}.stat h3{font-size:27px}.stat p{font-size:9px;display:flex;gap:4px;align-items:center}.dashboard-grid{gap:20px}.panel{box-shadow:0 14px 45px rgba(0,0,0,.12)}.today-strip{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 20px;padding:14px 17px;border:1px solid rgba(180,100,255,.12);border-radius:13px;background:linear-gradient(100deg,rgba(168,85,247,.065),rgba(255,255,255,.018));}.today-strip-main{display:flex;align-items:center;gap:12px;min-width:0}.today-strip-icon{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:rgba(168,85,247,.12);color:#c084fc;flex:0 0 auto}.today-strip-main strong{display:block;font-family:"Space Grotesk";font-size:12px}.today-strip-main span:last-child{display:block;margin-top:3px;color:#716979;font-size:9px;line-height:1.4}.today-strip-metrics{display:flex;gap:18px;color:#655e6c;font-size:9px;white-space:nowrap}.today-strip-metrics b{color:#d8cde0;font-size:12px;margin-right:3px}.green{color:#b78be0}.timer-panel{min-height:520px}
+@media(max-width:900px){.today-strip{align-items:flex-start;flex-direction:column}.today-strip-metrics{width:100%;justify-content:space-between;gap:8px}.account-area .status-pill{display:none}}
+@media(max-width:560px){.today-strip-metrics{display:grid;grid-template-columns:repeat(3,1fr)}.today-strip-metrics span{text-align:center}.header-kicker-row{align-items:flex-start;flex-direction:column;gap:5px}}
+
+
+/* NEXORA V4 WEBSITE POLISH */
+.top-header{position:relative}
+.today-strip{margin:20px 0 24px;padding:18px 20px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:linear-gradient(120deg,rgba(124,92,255,.12),rgba(255,255,255,.025));display:flex;align-items:center;justify-content:space-between;gap:16px}
+.today-strip strong{font-size:18px}.today-strip span{font-size:13px;opacity:.68}
+.manual-timer-display{font-size:64px!important;font-weight:700;letter-spacing:-2px;padding:22px 0}
+.manual-timer{border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:18px;background:rgba(0,0,0,.12);margin-top:18px}
+.manual-timer-controls button{min-width:100px}
+.plan-row{transition:transform .2s ease,background .2s ease}.plan-row:hover{transform:translateY(-2px);background:rgba(255,255,255,.035)}
+.intelligence-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important}
+.insight-box{min-height:150px;transition:transform .2s ease,border-color .2s ease}.insight-box:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.14)}
+.task-input select{min-width:110px}.task-input input{flex:1}
+.history-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}.history-chip,.setting-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);border-radius:16px;padding:16px}.history-chip span{display:block;font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:1px}.history-chip strong{display:block;font-size:24px;margin-top:7px}.history-list{display:grid;gap:9px}.history-row{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06)}.history-row small{opacity:.55}.settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.setting-card h3{margin:0 0 7px}.setting-card p{font-size:13px;line-height:1.55;opacity:.65;min-height:40px}.setting-card button{margin-top:8px}
+@media(max-width:700px){.today-strip,.history-row{align-items:flex-start;flex-direction:column}.history-summary,.settings-grid{grid-template-columns:1fr}.manual-timer-display{font-size:48px!important}}
+
+/* ===== ACCESSIBILITY / UI SCALE ===== */
+body { font-size: 15px; }
+.top-header h1 { font-size: 38px; }
+.top-header p, .sub, .mini { font-size: 14px; line-height: 1.6; }
+.eyebrow, .label { font-size: 11px; letter-spacing: 1.4px; }
+.nav-link { font-size: 14px; padding: 12px 13px; }
+.sidebar-label { font-size: 10px; }
+.sidebar-tip strong { font-size: 12px; }
+.sidebar-tip p { font-size: 11px; }
+.stat-top { font-size: 13px; }
+.stat h3 { font-size: 28px; }
+.stat p { font-size: 12px; }
+.panel-header h2, .panel h2 { font-size: 22px; }
+button, input, select, textarea { font-size: 14px; }
+
+/* Sidebar visibility control */
+body.sidebar-hidden .sidebar { transform: translateX(-100%); }
+body.sidebar-hidden .main { margin-left: 0; max-width: none; }
+.top-header { position:relative; gap:24px; }
+.account-area { flex-wrap:wrap; justify-content:flex-end; }
+.sidebar-toggle {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:10px 13px; border:1px solid rgba(180,100,255,.18);
+  border-radius:10px; background:rgba(168,85,247,.07); color:#cfc3d7;
+  font-size:13px; white-space:nowrap; transition:.2s ease;
+}
+.sidebar-toggle:hover { background:rgba(168,85,247,.14); color:#fff; transform:translateY(-1px); }
+.secondary-btn {
+  align-self:flex-start; margin-top:10px; padding:9px 14px;
+  border:1px solid rgba(168,85,247,.2); border-radius:8px;
+  background:rgba(168,85,247,.08); color:#cfc3d7; cursor:pointer;
+}
+.secondary-btn:hover { background:rgba(168,85,247,.14); color:#fff; }
+@media(max-width:900px){
+  body.sidebar-hidden .sidebar { transform:translateX(-100%); }
+  .top-header { gap:16px; }
+  .account-area { width:100%; justify-content:flex-start; }
+  .top-header h1 { font-size:34px; }
+}
+@media(max-width:550px){
+  .top-header { flex-direction:column; }
+  .account-area { width:100%; }
+  .sidebar-toggle { flex:1; }
+  .status-pill { flex:1; justify-content:center; }
+  .profile-btn { flex:1; }
+  .top-header h1 { font-size:30px; } body { font-size:14px; }
+}
+
+
+/* ===== LANDING PAGE ===== */
+.landing-page{position:fixed;inset:0;z-index:1000;overflow:auto;background:radial-gradient(circle at 75% 20%,rgba(155,70,230,.20),transparent 32%),radial-gradient(circle at 15% 80%,rgba(88,40,150,.12),transparent 30%),#08060d;transition:opacity .45s ease,visibility .45s ease;}
+.landing-page.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.landing-nav{height:82px;display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:auto;padding:0 28px;}
+.landing-brand{display:flex;align-items:center;gap:11px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:21px;letter-spacing:.3px;}
+.landing-brand-mark{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#9b4de8,#542080);box-shadow:0 8px 28px rgba(155,77,232,.22);}
+.landing-nav-actions{display:flex;gap:10px;align-items:center;}
+.landing-link,.landing-login{background:none;border:0;color:#cfc6d5;padding:10px 14px;font-size:14px;}
+.landing-login{border:1px solid rgba(255,255,255,.12);border-radius:10px;}
+.landing-hero{max-width:1180px;margin:auto;padding:78px 28px 55px;display:grid;grid-template-columns:1.02fr .98fr;gap:65px;align-items:center;min-height:calc(100vh - 82px);}
+.landing-kicker{display:inline-flex;align-items:center;gap:8px;color:#c28aff;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;margin-bottom:20px;}
+.landing-kicker:before{content:"";width:24px;height:1px;background:#9b4de8;}
+.landing-title{font-family:"Space Grotesk",sans-serif;font-size:clamp(48px,6vw,76px);line-height:1.02;letter-spacing:-2.8px;margin-bottom:22px;}
+.landing-title span{background:linear-gradient(90deg,#fff,#b76df3);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.landing-description{max-width:570px;color:#aaa1b2;font-size:18px;line-height:1.7;margin-bottom:32px;}
+.landing-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.landing-primary,.landing-secondary{padding:14px 21px;border-radius:11px;font-size:15px;font-weight:700;border:1px solid transparent;cursor:pointer;}
+.landing-primary{color:#fff;background:linear-gradient(135deg,#9b4de8,#6825a0);box-shadow:0 12px 35px rgba(126,53,184,.25);}
+.landing-secondary{color:#ddd4e2;background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.11);}
+.landing-note{margin-top:18px;color:#716978;font-size:12px;}
+.landing-preview{position:relative;}
+.landing-glow{position:absolute;inset:8% 0 8% 10%;background:rgba(137,58,201,.18);filter:blur(70px);border-radius:50%;}
+.preview-window{position:relative;border:1px solid rgba(255,255,255,.11);background:rgba(17,12,24,.88);border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.48);overflow:hidden;transform:perspective(1000px) rotateY(-4deg);}
+.preview-bar{height:38px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 13px;gap:6px;}
+.preview-dot{width:7px;height:7px;border-radius:50%;background:#665a70;}
+.preview-body{display:grid;grid-template-columns:115px 1fr;min-height:390px;}
+.preview-side{border-right:1px solid rgba(255,255,255,.06);padding:17px 11px;}
+.preview-logo{font-family:"Space Grotesk";font-weight:700;font-size:14px;margin-bottom:27px;}
+.preview-nav{height:29px;border-radius:7px;padding:7px 8px;color:#958b9c;font-size:9px;margin-bottom:5px;}
+.preview-nav.active{background:rgba(157,78,224,.14);color:#d5a5f5;}
+.preview-main{padding:22px;}
+.preview-main small{font-size:8px;color:#9b4de8;letter-spacing:1.4px;}
+.preview-main h3{font-family:"Space Grotesk";font-size:24px;margin:7px 0 18px;}
+.preview-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.preview-card{border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:11px;background:rgba(255,255,255,.025);}
+.preview-card span{display:block;font-size:7px;color:#8c8391;margin-bottom:7px;}.preview-card strong{font-size:16px;}
+.preview-focus{border:1px solid rgba(155,77,232,.22);background:linear-gradient(135deg,rgba(155,77,232,.10),rgba(255,255,255,.02));border-radius:10px;padding:15px;}
+.preview-focus p{font-size:8px;color:#9c929f;margin-bottom:7px;}.preview-focus strong{font-family:"Space Grotesk";font-size:27px;}
+.landing-features{max-width:1180px;margin:-15px auto 55px;padding:0 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.landing-feature{padding:20px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);border-radius:14px;}
+.landing-feature-icon{font-size:18px;color:#bd7cf0;margin-bottom:12px;}.landing-feature h3{font-size:16px;margin-bottom:7px;}.landing-feature p{font-size:13px;line-height:1.55;color:#8e8594;}
+@media(max-width:850px){.landing-hero{grid-template-columns:1fr;padding-top:45px;gap:40px;}.landing-title{font-size:52px;}.landing-features{grid-template-columns:1fr;}.preview-window{transform:none;}}
+@media(max-width:520px){.landing-nav{padding:0 18px}.landing-link{display:none}.landing-hero{padding:35px 18px 45px}.landing-title{font-size:43px;letter-spacing:-1.8px}.landing-description{font-size:16px}.landing-features{padding:0 18px}.preview-body{grid-template-columns:82px 1fr}.preview-side{padding:13px 8px}.preview-main{padding:15px}.preview-cards{grid-template-columns:1fr;}.preview-card:nth-child(n+2){display:none;}}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NEXORA LANDING PAGE -->
+<section class="landing-page" id="landingPage">
+  <nav class="landing-nav">
+    <div class="landing-brand"><div class="landing-brand-mark">N</div>NEXORA</div>
+    <div class="landing-nav-actions"><button class="landing-link" id="landingLearn">How it works</button><button class="landing-login" id="landingLogin">Log in</button></div>
+  </nav>
+  <div class="landing-hero">
+    <div>
+      <div class="landing-kicker">A focused study workspace</div>
+      <h1 class="landing-title">Study with purpose.<br><span>See your progress.</span></h1>
+      <p class="landing-description">NEXORA brings planning, focused study sessions, tasks and personal study patterns into one space — so you can spend less time organizing and more time learning.</p>
+      <div class="landing-actions"><button class="landing-primary" id="landingStart">Get started →</button><button class="landing-secondary" id="landingDemo">Explore NEXORA</button></div>
+      <p class="landing-note">Built around your study activity inside NEXORA — not your activity elsewhere.</p>
+    </div>
+    <div class="landing-preview">
+      <div class="landing-glow"></div>
+      <div class="preview-window">
+        <div class="preview-bar"><i class="preview-dot"></i><i class="preview-dot"></i><i class="preview-dot"></i></div>
+        <div class="preview-body">
+          <aside class="preview-side"><div class="preview-logo">NEXORA</div><div class="preview-nav active">✣ Dashboard</div><div class="preview-nav">✓ Tasks</div><div class="preview-nav">◌ Tracking</div><div class="preview-nav">↗ History</div><div class="preview-nav">◇ Flashcards</div></aside>
+          <div class="preview-main"><small>YOUR PRODUCTIVITY SPACE</small><h3>Focus on what matters.</h3><div class="preview-cards"><div class="preview-card"><span>STUDY TIME</span><strong>2h 15m</strong></div><div class="preview-card"><span>TASKS</span><strong>7</strong></div><div class="preview-card"><span>FOCUS</span><strong>84%</strong></div></div><div class="preview-focus"><p>FOCUS SESSION · MANUAL</p><strong>24:36</strong></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="landing-features" id="landingFeatures">
+    <div class="landing-feature"><div class="landing-feature-icon">◷</div><h3>Plan & focus</h3><p>Set your own study duration and use a real timer to record what you actually complete.</p></div>
+    <div class="landing-feature"><div class="landing-feature-icon">✦</div><h3>Study Mirror</h3><p>Turn your activity inside NEXORA into useful observations about rhythm, consistency and planning.</p></div>
+    <div class="landing-feature"><div class="landing-feature-icon">↗</div><h3>Track progress</h3><p>Keep daily activity, long-term work and study history organized in one focused workspace.</p></div>
+  </div>
+</section>
+
+<!-- ACCOUNT AUTH -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <div class="auth-mark">N</div>
+    <h2 id="authTitle">Welcome to NEXORA</h2>
+    <p id="authSubtitle">Your personal study space. Sign in to keep your plans, progress and Study Mirror data connected to your profile.</p>
+    <form class="auth-form" id="authForm">
+      <input id="authName" placeholder="Name" autocomplete="name">
+      <input id="authEmail" type="email" placeholder="Email" autocomplete="email" required>
+      <input id="authPassword" type="password" placeholder="Password" autocomplete="current-password" required>
+      <select id="authProfile"><option>Student</option><option>Work</option><option>Personal</option></select>
+      <button type="submit" id="authSubmit">Create account</button>
+    </form>
+    <div class="auth-switch"><span id="authSwitchText">Already have an account?</span> <button id="authSwitch" type="button">Log in</button></div>
+    <div class="auth-note">Prototype authentication: account data is stored locally in this browser. A secure backend can be connected for production login and cross-device sync.</div>
+  </div>
+</div>
+
+
+
+<div class="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo-area">
+
+            <div class="logo-mark">
+                N
+            </div>
+
+            <div>
+                <h2>NEXORA</h2>
+                <span>Focus • Learn • Grow</span>
+            </div>
+
+        </div>
+
+
+        <p class="sidebar-label">
+            MAIN
+        </p>
+
+
+        <nav>
+
+            <a href="#dashboard" class="nav-link active">
+                <span class="nav-icon">✣</span>
+                Dashboard
+            </a>
+
+            <a href="#tasks" class="nav-link">
+                <span class="nav-icon">✓</span>
+                Tasks
+            </a>
+
+            <a href="#math" class="nav-link">
+                <span class="nav-icon">∑</span>
+                Math Solver
+            </a>
+
+            <a href="#tracking" class="nav-link"><span class="nav-icon">◌</span>Tracking</a>
+
+            <a href="#history" class="nav-link"><span class="nav-icon">↗</span>History</a>
+
+            <a href="#flashcards" class="nav-link">
+                <span class="nav-icon">◇</span>
+                Flashcards
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-tip">
+
+                <span class="tip-icon">
+                    ✦
+                </span>
+
+                <div>
+                    <strong>
+                        Stay consistent.
+                    </strong>
+
+                    <p>
+                        Small progress adds up.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="version">
+                NEXORA v1.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <button
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+        ☰
+    </button>
+
+
+    <!-- MAIN -->
+
+    <main class="main" id="dashboard">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+            <div>
+
+                <div class="header-kicker-row">
+                    <p class="eyebrow">YOUR PRODUCTIVITY SPACE</p>
+                    <span class="today-badge" id="todayBadge">TODAY</span>
+                </div>
+
+                <h1 id="dashboardGreeting">Focus on what <span>matters.</span></h1>
+
+                <p class="header-subtitle" id="dashboardSubtitle">Plan your work. Focus deeply. Make progress.</p>
+                <div class="header-date" id="headerDate">Loading today's date…</div>
+
+            </div>
+
+
+            <div class="account-area">
+                <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Show or hide sidebar">☰ <span id="sidebarToggleText">Hide sidebar</span></button>
+                <div class="status-pill"><span class="status-dot"></span>SYSTEM READY</div>
+                <button class="profile-btn" id="profileBtn" type="button">
+                    <span class="profile-avatar" id="profileAvatar">N</span>
+                    <span class="profile-meta"><span class="profile-name" id="profileName">User</span><span class="profile-type" id="profileType">Student</span></span>
+                </button>
+                <div class="profile-menu" id="profileMenu">
+                    <button type="button" id="profileSettings">Profile & preferences</button>
+                    <button type="button" id="trackingMenu">Tracking & privacy</button>
+                    <button type="button" class="logout" id="logoutBtn">Log out</button>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <span>Study Time</span>
+                    <span class="stat-icon">◷</span>
+                </div>
+
+                <h3 id="studyTime">
+                    0h 00m
+                </h3>
+
+                <p>
+                    <span class="green" id="studyDelta">Today</span>
+                    <span id="studyDeltaText">study progress</span>
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <span>Tasks Completed</span>
+                    <span class="stat-icon">✓</span>
+                </div>
+
+                <h3 id="tasksCompleted">
+                    0
+                </h3>
+
+                <p>
+                    <span class="green" id="taskDelta">Today</span>
+                    <span id="taskDeltaText">task progress</span>
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <span>Focus Score</span>
+                    <span class="stat-icon">◉</span>
+                </div>
+
+                <h3 id="focusScore">
+                    0%
+                </h3>
+
+                <p>
+                    <span class="green" id="focusDelta">Live</span>
+                    <span id="focusDeltaText">from today's activity</span>
+                </p>
+
+            </div>
+
+
+        </section>
+
+        <section class="today-strip">
+            <div class="today-strip-main">
+                <span class="today-strip-icon">✦</span>
+                <div>
+                    <strong id="todayFocusTitle">Today's focus</strong>
+                    <span id="todayFocusText">Add a study plan to turn today's intention into measurable progress.</span>
+                </div>
+            </div>
+            <div class="today-strip-metrics">
+                <span><b id="todayPlanCount">0</b> plans</span>
+                <span><b id="todayMinutes">0</b> min studied</span>
+                <span><b id="todayTaskCount">0</b> tasks done</span>
+            </div>
+        </section>
+
+
+        <!-- MAIN CARDS -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- MANUAL STUDY PLAN -->
+
+            <div class="panel timer-panel" id="focus">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="label">FOCUS SESSION</p>
+                        <h2>Study Plan</h2>
+                    </div>
+
+                    <div class="ready">
+                        ● Manual
+                    </div>
+
+                </div>
+
+                <div class="timer-content">
+
+                    <div class="study-intake">
+
+                        <p class="timer-description" style="font-size:12px;line-height:1.5;">
+                            Set your own study plan, then start the timer. NEXORA records the study time you actually complete.
+                        </p>
+
+                        <div class="study-intake-grid">
+
+                            <input id="planTopic" type="text"
+                                placeholder="What are you studying?">
+
+                            <input id="planSubject" type="text"
+                                placeholder="Subject">
+
+                            <input id="planMinutes" type="number"
+                                min="1" max="1440" placeholder="Minutes">
+
+                            <button class="add-plan" id="addPlan">
+                                + Add Plan
+                            </button>
+
+                        </div>
+
+                        <div class="manual-timer">
+                            <div class="manual-timer-display" id="manualTimerDisplay">00:00</div>
+                            <div class="manual-timer-status" id="manualTimerStatus">Add a plan above to begin.</div>
+                            <div class="manual-timer-controls">
+                                <button class="timer-action primary" id="timerStart">Start Study</button>
+                                <button class="timer-action" id="timerPause">Pause</button>
+                                <button class="timer-action" id="timerSave">Save Session</button>
+                                <button class="timer-action" id="timerReset">Reset</button>
+                            </div>
+                        </div>
+
+                        <div class="plan-list" id="planList"></div>
+
+                    </div>
+
+                    <div class="session-info">
+
+                        <div>
+                            <span>Plans</span>
+                            <strong id="sessions">0</strong>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div>
+                            <span>Study Minutes</span>
+                            <strong id="minutes">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NEXORA INTELLIGENCE -->
+
+        <section class="panel extra" id="insights">
+
+            <div class="section-heading">
+                <div>
+                    <p class="label">NEXORA INTELLIGENCE</p>
+                    <h2>Your Study Mirror</h2>
+                </div>
+                <div class="progress" id="activityStatus">LEARNING</div>
+            </div>
+
+            <div class="intelligence-grid">
+
+                <div class="insight-box">
+                    <p class="label">PRODUCTIVITY STATE</p>
+                    <h3><span class="state-dot"></span><span id="productivityState">Getting started</span></h3>
+                    <p id="stateReason">Add a study plan and begin building your activity pattern.</p>
+                </div>
+
+                <div class="insight-box">
+                    <p class="label">STUDY RHYTHM</p>
+                    <h3 id="studyRhythm">Not enough data</h3>
+                    <p id="rhythmReason">NEXORA will detect your most active study pattern automatically.</p>
+                </div>
+
+                <div class="insight-box">
+                    <p class="label">PLAN REALITY</p>
+                    <h3 id="planReality">No pattern yet</h3>
+                    <p id="planReason">Your planned and completed activity will be compared without requiring extra setup.</p>
+                </div>
+
+                <div class="insight-box">
+                    <p class="label">FOCUS DRIFT</p>
+                    <h3 id="focusDrift">Not enough data</h3>
+                    <p id="driftReason">Completed and interrupted sessions will help NEXORA detect focus consistency.</p>
+                </div>
+
+                <div class="insight-box">
+                    <p class="label">PLANNING LOAD</p>
+                    <h3 id="planningLoad">Not enough data</h3>
+                    <p id="planningReason">NEXORA compares planned time with completed time to spot over-planning.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TRACKING -->
+        <section class="panel extra" id="tracking">
+            <div class="section-heading">
+                <div><p class="label">YOUR DATA</p><h2>Daily Tracking</h2></div>
+                <div class="progress" id="trackingDate">TODAY</div>
+            </div>
+            <div class="tracking-grid">
+                <div class="tracking-stat"><span>STUDY SESSIONS</span><strong id="trackSessions">0</strong></div>
+                <div class="tracking-stat"><span>PLANNED MINUTES</span><strong id="trackPlanned">0</strong></div>
+                <div class="tracking-stat"><span>ACTUAL MINUTES</span><strong id="trackActual">0</strong></div>
+                <div class="tracking-stat"><span>PLAN COMPLETION</span><strong id="trackCompletion">0%</strong></div>
+            </div>
+            <div class="tracking-controls">
+                <label class="toggle"><input type="checkbox" id="trackingToggle" checked> Activity insights enabled</label>
+                <button class="danger-btn" id="clearToday">Reset today's data</button>
+            </div>
+        </section>
+
+        <!-- TASKS -->
+
+        <section
+            class="panel tasks"
+            id="tasks"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="label">
+                        PRODUCTIVITY
+                    </p>
+
+                    <h2>
+                        Today's Tasks
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="progress"
+                    id="progress"
+                >
+                    0 / 0 completed
+                </div>
+
+            </div>
+
+
+            <div class="task-input">
+
+                <select id="taskType" aria-label="Task type">
+                    <option value="daily">Today</option>
+                    <option value="longterm">Long-term</option>
+                </select>
+
+                <input
+                    id="taskInput"
+                    type="text"
+                    placeholder="What do you want to accomplish?"
+                >
+
+                <button id="addTask">
+                    + Add Task
+                </button>
+
+            </div>
+
+
+            <ul
+                class="task-list"
+                id="taskList"
+            ></ul>
+
+        </section>
+
+
+        <!-- MATH -->
+
+        <section
+            class="panel extra"
+            id="math"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="label">
+                        LEARNING TOOL
+                    </p>
+
+                    <h2>
+                        Math Solver
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="solver">
+
+                <input
+                    id="mathInput"
+                    placeholder="Try: 25 × 4 + 10"
+                >
+
+                <button id="solve">
+                    Solve
+                </button>
+
+            </div>
+
+
+            <div
+                class="result"
+                id="result"
+            >
+                Enter an expression to calculate.
+            </div>
+
+        </section>
+
+
+        <!-- FLASHCARDS -->
+
+        <section
+            class="panel extra"
+            id="flashcards"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="label">
+                        ACTIVE RECALL
+                    </p>
+
+                    <h2>
+                        Flashcards
+                    </h2>
+
+                </div>
+
+                <button
+                    class="secondary-btn"
+                    id="newCard"
+                >
+                    + New Card
+                </button>
+
+            </div>
+
+
+            <div
+                class="flashcard"
+                id="flashcard"
+            >
+
+                <div class="card-inner">
+
+                    <div class="card-front">
+
+                        <span>
+                            QUESTION
+                        </span>
+
+                        <h3 id="question">
+                            What is the derivative of x²?
+                        </h3>
+
+                        <p>
+                            Click to reveal answer
+                        </p>
+
+                    </div>
+
+
+                    <div class="card-back">
+
+                        <span>
+                            ANSWER
+                        </span>
+
+                        <h3 id="answer">
+                            2x
+                        </h3>
+
+                        <p>
+                            Click to return
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel extra" id="history">
+            <div class="section-heading">
+                <div><p class="label">LONG-TERM VIEW</p><h2>Study History</h2></div>
+                <div class="progress" id="historyCount">0 DAYS</div>
+            </div>
+            <div class="history-summary" id="historySummary"></div>
+            <div class="history-list" id="historyList"></div>
+        </section>
+
+        <section class="panel extra" id="settings">
+            <div class="section-heading">
+                <div><p class="label">CONTROL CENTER</p><h2>Settings & Privacy</h2></div>
+            </div>
+            <div class="settings-grid">
+                <div class="setting-card"><h3>Profile</h3><p id="settingsProfile">Your NEXORA profile</p><button class="secondary-btn" id="settingsProfileBtn">View profile</button></div>
+                <div class="setting-card"><h3>Activity tracking</h3><p>NEXORA only uses activity generated inside this app for Study Mirror insights.</p><button class="secondary-btn" id="settingsTrackingBtn">Toggle tracking</button></div>
+                <div class="setting-card"><h3>Today's data</h3><p>Reset today's plans and study metrics while keeping archived history.</p><button class="danger-btn" id="settingsResetBtn">Reset today</button></div>
+                <div class="setting-card"><h3>Account</h3><p>End the current local session on this device.</p><button class="secondary-btn" id="settingsLogoutBtn">Log out</button></div>
+            </div>
+        </section>
+
+        <footer>
+
+            <span>
+                NEXORA
+            </span>
+
+            <span>
+                Your space to focus. Your time to grow.
+            </span>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   NEXORA DAILY SYSTEM + MANUAL STUDY INTAKE
+===================================================== */
+
+const planTopic = document.getElementById("planTopic");
+const planSubject = document.getElementById("planSubject");
+const planMinutes = document.getElementById("planMinutes");
+const addPlan = document.getElementById("addPlan");
+const planList = document.getElementById("planList");
+const sessionsDisplay = document.getElementById("sessions");
+const minutesDisplay = document.getElementById("minutes");
+const studyTime = document.getElementById("studyTime");
+const tasksCompleted = document.getElementById("tasksCompleted");
+const focusScore = document.getElementById("focusScore");
+const manualTimerDisplay = document.getElementById("manualTimerDisplay");
+const manualTimerStatus = document.getElementById("manualTimerStatus");
+const timerStart = document.getElementById("timerStart");
+const timerPause = document.getElementById("timerPause");
+const timerSave = document.getElementById("timerSave");
+const timerReset = document.getElementById("timerReset");
+
+const authOverlay = document.getElementById("authOverlay");
+const authForm = document.getElementById("authForm");
+const authName = document.getElementById("authName");
+const authEmail = document.getElementById("authEmail");
+const authPassword = document.getElementById("authPassword");
+const authProfile = document.getElementById("authProfile");
+const authTitle = document.getElementById("authTitle");
+const authSubmit = document.getElementById("authSubmit");
+const authSwitch = document.getElementById("authSwitch");
+const authSwitchText = document.getElementById("authSwitchText");
+let authMode = "signup";
+let currentUser = JSON.parse(localStorage.getItem("nexoraCurrentUser") || "null");
+function userDataKey(base){ return currentUser ? `nexora_${base}_${currentUser.id}` : `nexora_${base}_guest`; }
+function hashPassword(value){ let hash=0; for(let i=0;i<value.length;i++){ hash=((hash<<5)-hash)+value.charCodeAt(i); hash|=0; } return String(hash); }
+function showAuth(){ authOverlay.style.display="flex"; }
+function hideAuth(){ authOverlay.style.display="none"; }
+function refreshAuthUI(){
+  if(!currentUser){ showAuth(); return; }
+  hideAuth();
+  document.getElementById("profileName").textContent=currentUser.name;
+  document.getElementById("profileType").textContent=currentUser.profile;
+  document.getElementById("profileAvatar").textContent=(currentUser.name||"N").charAt(0).toUpperCase();
+}
+authSwitch.addEventListener("click",()=>{ authMode=authMode==="signup"?"login":"signup"; authTitle.textContent=authMode==="signup"?"Welcome to NEXORA":"Welcome back"; authSubmit.textContent=authMode==="signup"?"Create account":"Log in"; authSwitchText.textContent=authMode==="signup"?"Already have an account?":"New to NEXORA?"; authSwitch.textContent=authMode==="signup"?"Log in":"Create account"; authName.style.display=authMode==="signup"?"block":"none"; authProfile.style.display=authMode==="signup"?"block":"none"; });
+authForm.addEventListener("submit",e=>{ e.preventDefault(); const email=authEmail.value.trim().toLowerCase(); const password=authPassword.value; const users=JSON.parse(localStorage.getItem("nexoraUsers")||"{}"); if(authMode==="signup"){ if(!authName.value.trim()) return; if(users[email]){ authMode="login"; authSwitch.click(); return; } const user={id:email.replace(/[^a-z0-9]/g,"_"),name:authName.value.trim(),email,profile:authProfile.value}; users[email]={...user,passwordHash:hashPassword(password)}; localStorage.setItem("nexoraUsers",JSON.stringify(users)); currentUser=user; localStorage.setItem("nexoraCurrentUser",JSON.stringify(user)); location.reload(); } else { const user=users[email]; if(!user || user.passwordHash!==hashPassword(password)){ alert("Email or password not recognised."); return; } currentUser={id:user.id,name:user.name,email:user.email,profile:user.profile}; localStorage.setItem("nexoraCurrentUser",JSON.stringify(currentUser)); location.reload(); }});
+const landingPage=document.getElementById("landingPage");
+const currentUserExists=!!localStorage.getItem("nexoraCurrentUser");
+function openAuth(){ landingPage.classList.add("hidden"); document.getElementById("authOverlay").style.display="flex"; }
+function enterApp(){ landingPage.classList.add("hidden"); document.getElementById("authOverlay").style.display="flex"; }
+document.getElementById("landingStart").addEventListener("click",openAuth);
+document.getElementById("landingLogin").addEventListener("click",openAuth);
+document.getElementById("landingDemo").addEventListener("click",()=>document.getElementById("landingFeatures").scrollIntoView({behavior:"smooth"}));
+document.getElementById("landingLearn").addEventListener("click",()=>document.getElementById("landingFeatures").scrollIntoView({behavior:"smooth"}));
+if(currentUserExists){ landingPage.classList.add("hidden"); }
+
+refreshAuthUI();
+
+const todayKey = () => new Date().toISOString().slice(0,10);
+
+let studyData = JSON.parse(localStorage.getItem(userDataKey("studyData"))) || {
+    date: todayKey(),
+    plans: [],
+    completedMinutes: 0,
+    activity: [],
+    history: [],
+    trackingEnabled: true
+};
+
+let activePlanId = null;
+let timerSeconds = 0;
+let timerTotalSeconds = 0;
+let timerRunning = false;
+let timerInterval = null;
+
+function saveStudyData(){
+    localStorage.setItem(userDataKey("studyData"), JSON.stringify(studyData));
+    if(document.getElementById("todayPlanCount")) renderTodayStrip();
+}
+
+function resetDailyDataIfNeeded(){
+    const today = todayKey();
+    if(studyData.date !== today){
+        studyData.history = Array.isArray(studyData.history) ? studyData.history : [];
+        studyData.history.push({date:studyData.date,plans:studyData.plans,completedMinutes:studyData.completedMinutes,activity:studyData.activity,completedTasks:typeof taskData!=="undefined"?taskData.filter(t=>t.completed).length:0});
+        if(studyData.history.length>90) studyData.history=studyData.history.slice(-90);
+        studyData.date = today;
+        studyData.plans = [];
+        studyData.completedMinutes = 0;
+        studyData.activity = [];
+        if(typeof taskData !== "undefined"){
+            taskData = taskData.map(task => task.type === "longterm" ? task : ({...task, completed:false}));
+            saveTasks();
+        }
+        saveStudyData();
+    }
+}
+
+function logActivity(type, minutes=0){
+    if(studyData.trackingEnabled === false) return;
+    studyData.activity.push({type, minutes, time:new Date().toISOString()});
+    saveStudyData();
+}
+
+function formatTimer(seconds){
+    const safe = Math.max(0, Math.floor(seconds));
+    const hrs = Math.floor(safe / 3600);
+    const mins = Math.floor((safe % 3600) / 60);
+    const secs = safe % 60;
+    return hrs > 0
+        ? `${String(hrs).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`
+        : `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+}
+
+function setTimerDisplay(){
+    manualTimerDisplay.textContent = formatTimer(timerSeconds);
+}
+
+function loadPlanIntoTimer(id){
+    pauseTimer();
+    const plan = studyData.plans.find(p=>p.id===id);
+    if(!plan) return;
+    activePlanId = id;
+    const remainingMinutes = Math.max(0, plan.planned - plan.completed);
+    timerTotalSeconds = remainingMinutes * 60;
+    timerSeconds = timerTotalSeconds;
+    manualTimerStatus.textContent = `${plan.topic} · ${plan.subject} · ${remainingMinutes} min remaining`;
+    setTimerDisplay();
+}
+
+function addStudyPlan(){
+    const topic = planTopic.value.trim();
+    const subject = planSubject.value.trim() || "General";
+    const minutes = parseInt(planMinutes.value,10);
+    if(!topic || !Number.isFinite(minutes) || minutes < 1) return;
+
+    const plan = {id:Date.now(), topic, subject, planned:minutes, completed:0};
+    studyData.plans.push(plan);
+    logActivity("planned", minutes);
+
+    planTopic.value = "";
+    planSubject.value = "";
+    planMinutes.value = "";
+
+    renderStudyPlans();
+    updateStats();
+    updateIntelligence();
+    loadPlanIntoTimer(plan.id);
+    planTopic.focus();
+}
+
+addPlan.addEventListener("click", addStudyPlan);
+[planTopic,planSubject,planMinutes].forEach(input=>{
+    input.addEventListener("keydown", e=>{ if(e.key === "Enter") addStudyPlan(); });
+});
+
+function startTimer(){
+    if(timerRunning) return;
+    if(!activePlanId){
+        const first = studyData.plans.find(p=>p.completed < p.planned);
+        if(first) loadPlanIntoTimer(first.id);
+    }
+    if(timerSeconds <= 0){
+        manualTimerStatus.textContent = "Add a new plan or reset an existing plan to start again.";
+        return;
+    }
+    timerRunning = true;
+    manualTimerStatus.textContent = "Study session in progress…";
+    timerInterval = setInterval(()=>{
+        timerSeconds -= 1;
+        setTimerDisplay();
+        if(timerSeconds <= 0){
+            timerSeconds = 0;
+            pauseTimer();
+            finishTimedSession();
+        }
+    },1000);
+}
+
+function pauseTimer(){
+    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+    timerRunning = false;
+}
+
+function finishTimedSession(){
+    const plan = studyData.plans.find(p=>p.id===activePlanId);
+    if(!plan) return;
+    const addedMinutes = Math.max(0, Math.ceil(timerTotalSeconds / 60));
+    const remaining = Math.max(0, plan.planned - plan.completed);
+    const recorded = Math.min(addedMinutes, remaining);
+    plan.completed += recorded;
+    studyData.completedMinutes += recorded;
+    logActivity("completed", recorded);
+    manualTimerStatus.textContent = `Session recorded: ${recorded} min. ${plan.topic} updated.`;
+    renderStudyPlans();
+    updateStats();
+    updateIntelligence();
+    renderTracking();
+    if(plan.completed < plan.planned){
+        loadPlanIntoTimer(plan.id);
+    } else {
+        activePlanId = null;
+        timerSeconds = 0;
+        timerTotalSeconds = 0;
+        setTimerDisplay();
+    }
+}
+
+function saveCurrentSession(){
+    pauseTimer();
+    const plan = studyData.plans.find(p=>p.id===activePlanId);
+    if(!plan || !timerTotalSeconds) return;
+    const elapsed = timerTotalSeconds - timerSeconds;
+    const recorded = Math.min(plan.planned - plan.completed, Math.floor(elapsed / 60));
+    if(recorded <= 0){
+        manualTimerStatus.textContent = "Study for at least 1 minute before saving the session.";
+        return;
+    }
+    plan.completed += recorded;
+    studyData.completedMinutes += recorded;
+    logActivity("completed", recorded);
+    renderStudyPlans();
+    updateStats();
+    updateIntelligence();
+    renderTracking();
+    manualTimerStatus.textContent = `Saved ${recorded} min of actual study time.`;
+    if(plan.completed < plan.planned){
+        loadPlanIntoTimer(plan.id);
+    } else {
+        activePlanId = null;
+        timerSeconds = 0;
+        timerTotalSeconds = 0;
+        setTimerDisplay();
+    }
+}
+
+timerStart.addEventListener("click", startTimer);
+timerPause.addEventListener("click", ()=>{
+    pauseTimer();
+    if(activePlanId) manualTimerStatus.textContent = "Paused. Resume when you are ready.";
+});
+timerSave.addEventListener("click", saveCurrentSession);
+timerReset.addEventListener("click", ()=>{
+    pauseTimer();
+    if(activePlanId) loadPlanIntoTimer(activePlanId);
+    else {
+        timerSeconds = 0;
+        timerTotalSeconds = 0;
+        setTimerDisplay();
+        manualTimerStatus.textContent = "Add a plan above to begin.";
+    }
+});
+
+function completePlan(id){
+    const plan = studyData.plans.find(p=>p.id===id);
+    if(!plan) return;
+    pauseTimer();
+    const remaining = Math.max(0, plan.planned - plan.completed);
+    if(!remaining) return;
+    plan.completed = plan.planned;
+    studyData.completedMinutes += remaining;
+    logActivity("completed", remaining);
+    if(activePlanId===id){ activePlanId=null; timerSeconds=0; timerTotalSeconds=0; setTimerDisplay(); }
+    renderStudyPlans();
+    updateStats();
+    updateIntelligence();
+    renderTracking();
+}
+
+function renderStudyPlans(){
+    const plans = studyData.plans;
+    sessionsDisplay.textContent = plans.length;
+    minutesDisplay.textContent = studyData.completedMinutes;
+    if(!plans.length){
+        planList.innerHTML = '<div class="plan-row"><div><div class="plan-name">No study plan yet.</div><div class="plan-meta">Add your first subject above.</div></div></div>';
+        return;
+    }
+    planList.innerHTML = plans.map(plan=>`
+        <div class="plan-row">
+            <div>
+                <div class="plan-name">${escapeHTML(plan.topic)}</div>
+                <div class="plan-meta">${escapeHTML(plan.subject)} · ${plan.completed}/${plan.planned} min</div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;">
+                <button onclick="loadPlanIntoTimer(${plan.id})">${plan.completed >= plan.planned ? "Done" : "Start"}</button>
+                <button onclick="completePlan(${plan.id})">${plan.completed >= plan.planned ? "Completed" : "Mark done"}</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function escapeHTML(value){
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[char]));
+}
+
+function updateStats(){
+    const completed = completedCount();
+
+    const hours = Math.floor(studyData.completedMinutes / 60);
+    const mins = studyData.completedMinutes % 60;
+
+    studyTime.textContent =
+        `${hours}h ${String(mins).padStart(2,"0")}m`;
+
+    tasksCompleted.textContent = completed;
+
+    const planned = studyData.plans.reduce((sum,p)=>sum+p.planned,0);
+    const ratio = planned
+        ? Math.min(100, Math.round((studyData.completedMinutes/planned)*100))
+        : 0;
+
+    focusScore.textContent = ratio + "%";
+}
+
+function updateIntelligence(){
+
+    const plans = studyData.plans;
+    const planned = plans.reduce((sum,p)=>sum+p.planned,0);
+    const completed = studyData.completedMinutes;
+
+    let state = "Getting started";
+    let reason = "Add a study plan and begin building your activity pattern.";
+
+    if(completed >= 90){
+        state = "Building momentum";
+        reason = "You have built a meaningful amount of study time today.";
+    }else if(completed > 0){
+        state = "Focusing";
+        reason = "You have started turning planned study into completed work.";
+    }else if(plans.length >= 3){
+        state = "Planning heavily";
+        reason = "You have several plans but no completed study time yet.";
+    }
+
+    document.getElementById("productivityState").textContent = state;
+    document.getElementById("stateReason").textContent = reason;
+
+    if(!studyData.activity.length){
+        document.getElementById("studyRhythm").textContent = "Not enough data";
+        document.getElementById("rhythmReason").textContent =
+            "NEXORA will detect your study pattern automatically.";
+    }else{
+        const hourCounts = {};
+        studyData.activity.forEach(a=>{
+            const h = new Date(a.time).getHours();
+            hourCounts[h] = (hourCounts[h]||0) + 1;
+        });
+
+        const bestHour = Object.entries(hourCounts)
+            .sort((a,b)=>b[1]-a[1])[0][0];
+
+        const h = Number(bestHour);
+        const label = h < 12 ? "Morning" : h < 17 ? "Afternoon" : "Evening";
+
+        document.getElementById("studyRhythm").textContent = label;
+        document.getElementById("rhythmReason").textContent =
+            `Most of today's NEXORA activity has happened around ${String(h).padStart(2,"0")}:00.`;
+    }
+
+    const reality = document.getElementById("planReality");
+    const realityReason = document.getElementById("planReason");
+
+    if(!planned){
+        reality.textContent = "No plan yet";
+        realityReason.textContent =
+            "Add a plan and NEXORA will compare intention with actual progress.";
+    }else{
+        const completion = Math.round((completed/planned)*100);
+
+        if(completion >= 100){
+            reality.textContent = "On track";
+            realityReason.textContent =
+                "Your completed study time has reached today's planned time.";
+        }else if(completion >= 60){
+            reality.textContent = "Balanced";
+            realityReason.textContent =
+                `${completion}% of planned study time has been completed.`;
+        }else{
+            reality.textContent = "Plan ahead";
+            realityReason.textContent =
+                `${completion}% of planned study time is completed so far.`;
+        }
+    }
+
+    document.getElementById("activityStatus").textContent =
+        studyData.activity.length ? "ACTIVE" : "LEARNING";
+}
+
+function renderTracking(){
+  const planned=studyData.plans.reduce((sum,p)=>sum+p.planned,0);
+  document.getElementById("trackSessions").textContent=studyData.activity.filter(a=>a.type==="completed").length;
+  document.getElementById("trackPlanned").textContent=planned;
+  document.getElementById("trackActual").textContent=studyData.completedMinutes;
+  document.getElementById("trackCompletion").textContent=(planned?Math.min(100,Math.round(studyData.completedMinutes/planned*100)):0)+"%";
+  document.getElementById("trackingToggle").checked=studyData.trackingEnabled!==false;
+  document.getElementById("trackingDate").textContent=studyData.date===todayKey()?"TODAY":"ARCHIVED";
+}
+document.getElementById("trackingToggle").addEventListener("change",e=>{studyData.trackingEnabled=e.target.checked;saveStudyData();});
+document.getElementById("clearToday").addEventListener("click",()=>{ if(!confirm("Reset today's study data? Your saved history will remain.")) return; studyData.history.push({date:studyData.date,plans:studyData.plans,completedMinutes:studyData.completedMinutes,activity:studyData.activity,completedTasks:completedCount()}); studyData.plans=[];studyData.completedMinutes=0;studyData.activity=[];taskData=taskData.map(t=>({...t,completed:false}));saveTasks();saveStudyData();activePlanId=null;timerSeconds=0;timerTotalSeconds=0;pauseTimer();setTimerDisplay();renderStudyPlans();renderTasks();updateStats();updateIntelligence();renderTracking();});
+
+document.getElementById("profileBtn").addEventListener("click",()=>document.getElementById("profileMenu").classList.toggle("open"));
+document.getElementById("trackingMenu").addEventListener("click",()=>{document.getElementById("profileMenu").classList.remove("open");document.getElementById("tracking").scrollIntoView({behavior:"smooth"});});
+document.getElementById("profileSettings").addEventListener("click",()=>{document.getElementById("profileMenu").classList.remove("open");alert(`Profile: ${currentUser.name}\nType: ${currentUser.profile}\nEmail: ${currentUser.email}`);});
+document.getElementById("logoutBtn").addEventListener("click",()=>{localStorage.removeItem("nexoraCurrentUser");location.reload();});
+
+/* =====================================================
+   TASKS
+===================================================== */
+
+const taskInput =
+    document.getElementById("taskInput");
+
+const addTask =
+    document.getElementById("addTask");
+
+const taskList =
+    document.getElementById("taskList");
+
+const progress =
+    document.getElementById("progress");
+
+
+let taskData =
+    JSON.parse(
+        localStorage.getItem(userDataKey("tasks"))
+    ) || [];
+
+function renderDashboardHeader(){
+    const now=new Date();
+    const name=(currentUser&&currentUser.name)?currentUser.name.split(/\s+/)[0]:"there";
+    const hour=now.getHours();
+    const greeting=hour<12?"Good morning":hour<17?"Good afternoon":"Good evening";
+    const title=document.getElementById("dashboardGreeting");
+    title.innerHTML=`${greeting}, ${name}. <span>Let's make progress.</span>`;
+    document.getElementById("dashboardSubtitle").textContent=currentUser?.profile==="Student"?"Plan your study. Focus deeply. See what actually works.":"Plan your time. Focus deeply. See what actually works.";
+    document.getElementById("headerDate").textContent=now.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+    document.getElementById("todayBadge").textContent=now.toLocaleDateString(undefined,{month:"short",day:"numeric"}).toUpperCase();
+}
+
+function renderTodayStrip(){
+    const planned=studyData.plans.reduce((sum,p)=>sum+(Number(p.planned)||0),0);
+    const done=completedCount();
+    document.getElementById("todayPlanCount").textContent=studyData.plans.length;
+    document.getElementById("todayMinutes").textContent=studyData.completedMinutes||0;
+    document.getElementById("todayTaskCount").textContent=done;
+    const focusText=document.getElementById("todayFocusText");
+    if((studyData.completedMinutes||0)>0){
+        focusText.textContent=`${studyData.completedMinutes} minutes completed${planned?` of ${planned} planned`:""}. Keep the next session intentional.`;
+    }else if(planned){
+        focusText.textContent=`${planned} minutes planned today. Start a session when you're ready.`;
+    }else{
+        focusText.textContent="Add a study plan to turn today's intention into measurable progress.";
+    }
+    document.getElementById("studyDelta").textContent=studyData.completedMinutes?"Active":"Ready";
+    document.getElementById("studyDeltaText").textContent=studyData.completedMinutes?"today":"for today's session";
+    document.getElementById("taskDelta").textContent=done?`${done} done`:"0 done";
+    document.getElementById("taskDeltaText").textContent="today";
+    document.getElementById("focusDelta").textContent=studyData.activity.length?"Tracking":"Ready";
+    document.getElementById("focusDeltaText").textContent=studyData.activity.length?"from activity":"for your first session";
+}
+
+renderDashboardHeader();
+
+resetDailyDataIfNeeded();
+renderStudyPlans();
+updateStats();
+updateIntelligence();
+renderTodayStrip();
+
+
+function saveTasks() {
+
+    localStorage.setItem(userDataKey("tasks"), JSON.stringify(taskData));
+    if(document.getElementById("todayTaskCount")) renderTodayStrip();
+
+}
+
+
+function completedCount() {
+
+    return taskData.filter(
+        task => task.completed
+    ).length;
+
+}
+
+
+function updateProgress() {
+
+    progress.textContent =
+        `${completedCount()} / ${taskData.length} completed`;
+
+    updateStats();
+
+}
+
+
+function renderTasks() {
+
+    taskList.innerHTML = "";
+
+
+    taskData.forEach(task => {
+
+        const li =
+            document.createElement("li");
+
+        li.className =
+            "task-item";
+
+
+        if (task.completed) {
+
+            li.classList.add("completed");
+
+        }
+
+
+        const check =
+            document.createElement("button");
+
+        check.className =
+            "check";
+
+        check.textContent =
+            "✓";
+
+
+        const text =
+            document.createElement("span");
+
+        text.className =
+            "task-text";
+
+        text.textContent =
+            task.text;
+
+
+        const del =
+            document.createElement("button");
+
+        del.className =
+            "delete";
+
+        del.textContent =
+            "×";
+
+
+        function toggleTask() {
+
+            task.completed =
+                !task.completed;
+
+            saveTasks();
+
+            if(task.completed) logActivity("task", 0);
+
+            renderTasks();
+            updateIntelligence();
+            renderTracking();
+
+        }
+
+
+        check.addEventListener(
+            "click",
+            toggleTask
+        );
+
+        text.addEventListener(
+            "click",
+            toggleTask
+        );
+
+
+        del.addEventListener(
+            "click",
+            () => {
+
+                taskData =
+                    taskData.filter(
+                        t => t.id !== task.id
+                    );
+
+                saveTasks();
+
+                renderTasks();
+
+            }
+        );
+
+
+        li.appendChild(check);
+
+        li.appendChild(text);
+
+        li.appendChild(del);
+
+        taskList.appendChild(li);
+
+    });
+
+
+    updateProgress();
+
+}
+
+
+function addNewTask() {
+
+    const text =
+        taskInput.value.trim();
+
+
+    if (!text) return;
+
+
+    taskData.push({
+
+        id: Date.now(),
+
+        text: text,
+
+        completed: false
+
+    });
+
+
+    taskInput.value = "";
+
+    saveTasks();
+
+    renderTasks();
+
+    taskInput.focus();
+
+}
+
+
+addTask.addEventListener(
+    "click",
+    addNewTask
+);
+
+
+taskInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Enter") {
+
+            addNewTask();
+
+        }
+
+    }
+);
+
+
+renderTasks();
+
+
+/* =====================================================
+   MATH SOLVER
+===================================================== */
+
+const mathInput =
+    document.getElementById("mathInput");
+
+const solve =
+    document.getElementById("solve");
+
+const result =
+    document.getElementById("result");
+
+
+function calculate() {
+
+    let expression =
+        mathInput.value.trim();
+
+
+    if (!expression) {
+
+        result.textContent =
+            "Enter an expression.";
+
+        return;
+
+    }
+
+
+    expression =
+        expression
+            .replaceAll("×", "*")
+            .replaceAll("÷", "/")
+            .replaceAll("^", "**");
+
+
+    if (
+        !/^[0-9+\-*/%.()\s*]+$/.test(
+            expression
+        )
+    ) {
+
+        result.textContent =
+            "Please enter a valid expression.";
+
+        return;
+
+    }
+
+
+    try {
+
+        const answer =
+            Function(
+                `"use strict"; return (${expression})`
+            )();
+
+
+        if (
+            !Number.isFinite(answer)
+        ) {
+
+            throw new Error();
+
+        }
+
+
+        result.textContent =
+            "= " + answer;
+
+    }
+
+    catch {
+
+        result.textContent =
+            "Unable to calculate.";
+
+    }
+
+}
+
+
+solve.addEventListener(
+    "click",
+    calculate
+);
+
+
+mathInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Enter") {
+
+            calculate();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FLASHCARDS
+===================================================== */
+
+const flashcard =
+    document.getElementById("flashcard");
+
+const newCard =
+    document.getElementById("newCard");
+
+const question =
+    document.getElementById("question");
+
+const answer =
+    document.getElementById("answer");
+
+
+const cards = [
+
+    [
+        "What is the derivative of x²?",
+        "2x"
+    ],
+
+    [
+        "What is Newton's second law?",
+        "F = ma"
+    ],
+
+    [
+        "What is sin 90°?",
+        "1"
+    ],
+
+    [
+        "What is the SI unit of force?",
+        "Newton (N)"
+    ],
+
+    [
+        "What is the quadratic formula?",
+        "x = (−b ± √(b² − 4ac)) / 2a"
+    ]
+
+];
+
+
+let cardIndex = 0;
+
+
+flashcard.addEventListener(
+    "click",
+    () => {
+
+        flashcard.classList.toggle(
+            "flipped"
+        );
+
+    }
+);
+
+
+newCard.addEventListener(
+    "click",
+    () => {
+
+        cardIndex++;
+
+        if (
+            cardIndex >= cards.length
+        ) {
+
+            cardIndex = 0;
+
+        }
+
+
+        question.textContent =
+            cards[cardIndex][0];
+
+        answer.textContent =
+            cards[cardIndex][1];
+
+        flashcard.classList.remove(
+            "flipped"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   V4 HISTORY + SETTINGS + STUDY MIRROR
+===================================================== */
+function renderHistory(){
+    const history = Array.isArray(studyData.history) ? studyData.history.slice().reverse() : [];
+    const totalMinutes = history.reduce((n,d)=>n+(d.completedMinutes||0),0) + (studyData.completedMinutes||0);
+    const totalDays = history.filter(d=>(d.completedMinutes||0)>0).length + (studyData.completedMinutes>0?1:0);
+    const avg = totalDays ? Math.round(totalMinutes/totalDays) : 0;
+    document.getElementById("historyCount").textContent = history.length + (studyData.completedMinutes>0?1:0) + " DAYS";
+    document.getElementById("historySummary").innerHTML = `
+      <div class="history-chip"><span>Total study time</span><strong>${Math.floor(totalMinutes/60)}h ${totalMinutes%60}m</strong></div>
+      <div class="history-chip"><span>Active days</span><strong>${totalDays}</strong></div>
+      <div class="history-chip"><span>Average / active day</span><strong>${avg}m</strong></div>`;
+    const rows = history.slice(0,30).map(d=>`<div class="history-row"><div><strong>${d.date}</strong><br><small>${(d.plans||[]).length} plans · ${(d.completedTasks||0)} tasks completed</small></div><strong>${d.completedMinutes||0} min</strong></div>`).join("");
+    document.getElementById("historyList").innerHTML = rows || '<div class="history-row"><span>No archived days yet.</span><small>Your completed days will appear here automatically.</small></div>';
+}
+
+function updateMirrorV4(){
+    const acts=studyData.activity||[];
+    const starts=acts.filter(a=>a.type==="start").length;
+    const completedSessions=acts.filter(a=>a.type==="completed").length;
+    const pauses=acts.filter(a=>a.type==="pause").length;
+    const drift=starts ? Math.round((pauses/starts)*100) : 0;
+    const planned=studyData.plans.reduce((n,p)=>n+(p.planned||0),0);
+    const actual=studyData.completedMinutes||0;
+    const load=planned ? Math.round((actual/planned)*100) : 0;
+    document.getElementById("focusDrift").textContent=starts ? (drift<=20?"Steady":drift<=50?"Some drift":"Frequent drift") : "Not enough data";
+    document.getElementById("driftReason").textContent=starts ? `${pauses} pause${pauses===1?"":"s"} across ${starts} started session${starts===1?"":"s"}.` : "Start a study session and NEXORA will track interruptions.";
+    document.getElementById("planningLoad").textContent=planned ? (load>110?"Over-planned":load>=70?"Manageable":"Under target") : "Not enough data";
+    document.getElementById("planningReason").textContent=planned ? `${actual} of ${planned} planned minutes completed (${Math.min(999,load)}%).` : "Add a plan to compare intention with actual study time.";
+}
+
+function resetTodaySafe(){
+    if(!confirm("Reset today's study data? Archived history will remain.")) return;
+    studyData.history=Array.isArray(studyData.history)?studyData.history:[];
+    studyData.history.push({date:studyData.date,plans:studyData.plans,completedMinutes:studyData.completedMinutes,activity:studyData.activity,completedTasks:completedCount()});
+    studyData.plans=[]; studyData.completedMinutes=0; studyData.activity=[]; saveStudyData();
+    if(typeof taskData!=="undefined"){ taskData=taskData.map(t=>t.type==="longterm"?t:{...t,completed:false}); saveTasks(); }
+    activePlanId=null; pauseTimer(); timerSeconds=0; timerTotalSeconds=0; setTimerDisplay();
+    renderStudyPlans(); renderTasks(); updateStats(); updateIntelligence(); updateMirrorV4(); renderTracking(); renderHistory();
+}
+
+document.getElementById("settingsProfileBtn")?.addEventListener("click",()=>alert(`Profile: ${currentUser.name}\nType: ${currentUser.profile}\nEmail: ${currentUser.email}`));
+document.getElementById("settingsTrackingBtn")?.addEventListener("click",()=>{studyData.trackingEnabled=studyData.trackingEnabled===false;saveStudyData();renderTracking();});
+document.getElementById("settingsResetBtn")?.addEventListener("click",resetTodaySafe);
+document.getElementById("settingsLogoutBtn")?.addEventListener("click",()=>{localStorage.removeItem("nexoraCurrentUser");location.reload();});
+
+const originalRenderTasks=renderTasks;
+function renderTasks(){
+    originalRenderTasks();
+    document.querySelectorAll("#taskList li").forEach((li,i)=>{
+        const task=taskData[i];
+        if(task?.type==="longterm") li.insertAdjacentHTML("beforeend",'<span style="margin-left:auto;font-size:10px;opacity:.5">LONG-TERM</span>');
+    });
+}
+
+renderHistory();
+updateMirrorV4();
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+const sidebarToggle = document.getElementById("sidebarToggle");
+const sidebarToggleText = document.getElementById("sidebarToggleText");
+const savedSidebarState = localStorage.getItem("nexoraSidebarHidden") === "true";
+if(savedSidebarState) document.body.classList.add("sidebar-hidden");
+function updateSidebarButton(){
+  const hidden = document.body.classList.contains("sidebar-hidden");
+  sidebarToggleText.textContent = hidden ? "Show sidebar" : "Hide sidebar";
+  sidebarToggle.setAttribute("aria-label", hidden ? "Show sidebar" : "Hide sidebar");
+}
+sidebarToggle.addEventListener("click",()=>{
+  const hidden = document.body.classList.toggle("sidebar-hidden");
+  localStorage.setItem("nexoraSidebarHidden", hidden);
+  updateSidebarButton();
+});
+updateSidebarButton();
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const links =
+    document.querySelectorAll(".nav-link");
+
+
+mobileMenu.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+links.forEach(link => {
+
+    link.addEventListener(
+        "click",
+        () => {
+
+            links.forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            link.classList.add(
+                "active"
+            );
+
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+        }
+    );
+
+});
+
+
+</script>
+
+</body>
+</html>
